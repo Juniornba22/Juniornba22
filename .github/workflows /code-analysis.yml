@@ -18,14 +18,14 @@ jobs:
           java-version: '17'
 
       - name: Tornar gradlew executável
-        run: chmod +x EVANGELISTASISTEMAS/gradlew
+        run: chmod +x Juniornba22/gradlew
 
       - name: Executar Lint
         run: ./gradlew lintDebug
-        working-directory: EVANGELISTASISTEMAS
+        working-directory: Juniornba22
 
       - name: Upload do Relatório
         uses: actions/upload-artifact@v4
         with:
           name: Relatorio-Lint
-          path: EVANGELISTASISTEMAS/app/build/reports/lint-results-debug.html
+          path: Juniornba22/app/build/reports/lint-results-debug.html
