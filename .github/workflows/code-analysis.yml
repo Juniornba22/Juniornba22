@@ -1,0 +1,30 @@
+name: Android Code Analysis
+
+on:
+  workflow_dispatch: # permite executar manualmente
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar o projeto
+        uses: actions/checkout@v4
+
+      - name: Configurar Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Permitir execução do Gradlew
+        run: chmod +x gradlew
+
+      - name: Executar Lint
+        run: ./gradlew lintDebug
+
+      - name: Upload do Relatório Lint
+        uses: actions/upload-artifact@v4
+        with:
+          name: Relatorio-Lint
+          path: app/build/reports/lint-results-debug.html
