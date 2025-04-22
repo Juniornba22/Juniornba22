@@ -1,27 +1,30 @@
 name: Android Code Analysis
 
 on:
-  push:
-    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   lint:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+      - name: Clonar repositório
+        uses: actions/checkout@v4
 
-    - name: Setup Java
-      uses: actions/setup-java@v4
-      with:
-        distribution: 'temurin'
-        java-version: '17'
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
 
-    - name: Execute Gradle Lint Check
-      run: ./gradlew lintDebug
+      - name: Tornar gradlew executável
+        run: chmod +x ./EVANGELISTASISTEMAS/gradlew
 
-    - name: Upload Lint Results
-      uses: actions/upload-artifact@v4
-      with:
-        name: lint-results
-        path: app/build/reports/lint-results-debug.html
+      - name: Executar Lint
+        run: ./EVANGELISTASISTEMAS/gradlew lintDebug
+
+      - name: Upload do Relatório
+        uses: actions/upload-artifact@v4
+        with:
+          name: Relatorio-Lint
+          path: EVANGELISTASISTEMAS/app/build/reports/lint-results-debug.html
